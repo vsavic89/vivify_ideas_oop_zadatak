@@ -1,14 +1,16 @@
 <?php
 
 class Macevalac extends Heroj {    
+    
+    use HerojZajednickeAkcije;    
 
-    private $log;
+    private $log;    
 
     public function __construct(Logovanje $log)
     {
         $this->health = 100;
         $this->aktivnoOruzje = null;
-        $this->ranac = [];       
+        $this->ranac = new Ranac();        
         $this->log = $log;
     }
 
@@ -17,13 +19,13 @@ class Macevalac extends Heroj {
         try
         {
             if($oruzje instanceof Carolija){
-                throw new Exception(self::class . ' nema prava za ovo oruzje: ' . Carolija::class);
+                throw new Exception(self::class . ' nema prava za ovo oruzje: ' . get_class($oruzje));
             }            
 
-            $this->ubaciOruzjeURanac($this->log, $this, $oruzje);            
+            $this->ubaciOruzjeURanac($this->log, $oruzje);            
 
         }catch(Exception $e){
-            return $e->getMessage();
+            $this->log->upisi($e->getMessage());
         }        
     }    
 }

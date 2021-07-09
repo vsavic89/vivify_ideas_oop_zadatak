@@ -15,4 +15,14 @@ class Ranac {
     {
         return $this->maxBrojOruzja;
     }
+    
+    public function getOruzja()
+    {
+        return $this->oruzja;
+    }
+
+    public function dodajOruzje(Oruzje $oruzje)
+    {
+        array_push($this->oruzja, $oruzje);
+    }
 }
